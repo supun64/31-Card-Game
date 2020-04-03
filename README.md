@@ -3,17 +3,17 @@
 This is a card game played by several players and the goal is to not get the lowest card hand of the round
 
 ## Deffinitions
-player_<No>    : A Player
-Dealer         : An NPC [optional]
-Card Pack      : Normal Card pack with 4 suits and 52 cards
-Table Card     : There is a one card that is always displaied on the table which is not belong to any player and any player can
-exchange one of his card with this when they get their chance
-Deck           : Deck of cards which are left after disributing cards among players are placed on the table but turn down this is
-that card set
-Deck Card      : A player can look the top card on the deck if he/she is not satisfied with the table card
-Knock          : If a player is satisfied with his hand he can knock on the table and after a player has knocked every other players
-get a one another chance to play in that round
-Pass           : If a player is not satisfied with both table and deck cards he can pass his hand to the next player
+    player         : A Player is being called by his name
+    Dealer         : An NPC [optional]
+    Card Pack      : Normal Card pack with 4 suits and 52 cards
+    Table Card     : There is a one card that is always displaied on the table which is not belong to any player and any player can
+    exchange one of his card with this when they get their chance
+    Deck           : Deck of cards which are left after disributing cards among players are placed on the table but turn down this is
+    that card set
+    Deck Card      : A player can look the top card on the deck if he/she is not satisfied with the table card
+    Knock          : If a player is satisfied with his hand he can knock on the table and after a player has knocked every other players
+    get a one another chance to play in that round
+    Pass           : If a player is not satisfied with both table and deck cards he can pass his hand to the next player
 
 ## Basic Rules Of The Game
 
