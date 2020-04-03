@@ -45,9 +45,9 @@ the card shown on the table or they can take the top card from the deck and repl
 
 If a player is satisfied with the value of card he has he can 'Knock', and when he does every other player get **only one chance** to
 play in that round
-    1. The person who has the lowest value of cards in the same suit will lose a life
-    2. If the person who had knock has the lowest card value he will lose **two lives**
-    3. If two people have same lowest value then **both of them** will lose a life 
+   1. The person who has the lowest value of cards in the same suit will lose a life
+   2. If the person who had knock has the lowest card value he will lose **two lives**
+   3. If two people have same lowest value then **both of them** will lose a life 
 
 How ever if a player got 31 in his hand in same suit, the round will be over instantly and player/players who got lowest values in
 there hand will loose that round
