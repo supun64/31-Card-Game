@@ -2,6 +2,9 @@
 
 This is a card game played by several players and the goal is to not get the lowest card hand of the round
 
+If you want to get a better experiance with game run RunMeFirst.reg file before running the game from GameMain, And also make sure you 
+run it in python console or command prompt or terminal(in linux/mac)
+
 ## Deffinitions
     player         : A Player is being called by his name
     Dealer         : An NPC [optional]
