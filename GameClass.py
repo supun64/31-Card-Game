@@ -31,6 +31,7 @@ def see_deck_card(card_pack):
 class Player:
     """
     This is the class of a player which are playing the game
+    attribute name: name of an instinct
     """
     # This is a comment below
     """
@@ -43,12 +44,13 @@ class Player:
 
     def __init__(self, name):
         self.name = name
-        self.hand = []
-        self.lives = 3
+        self.hand = []  # hand of an instinct at the beginning
+        self.lives = 3  # lives of an instinct at the beginning
 
     def get_hand(self, card_pack):
         """
         This method will chose the player a random 3 cards, THIS IS DONE AT THE BEGINNING OF THE GAME
+        AND STARING AT A NEW ROUND
         :return: players hand
         """
         self.hand = []
@@ -56,7 +58,7 @@ class Player:
         while len(self.hand) != 3:
             rand_card = random.choice(card_pack)
             self.hand.append(rand_card)
-            card_pack.remove(rand_card)
+            card_pack.remove(rand_card)  # Because we are plying this game with a one card pack
 
         return self.hand
 
@@ -89,17 +91,23 @@ class Player:
 
 class NPC(Player):
     """
-    This is a class for single AI player in the game
+    This is a class for single AI player in the game, and this is inherited from the Player class
     """
     pack_suit = ["H", "C", "S", "D"]
     pack_value = {"A": 11, "K": 10, "Q": 10, "J": 10, "10": 10, "9": 9,
                   "8": 8, "7": 7, "6": 6, "5": 5, "4": 4, "3": 3, "2": 2}
 
     def __init__(self, name):
+        # we initiate Player at the beginning caz we need those attributes for each object of NPC itself
         Player.__init__(self, name)
         self.hot_round = True
 
     def check_value(self, card_hand):
+        """
+        Check The values of each suit in a card hand
+        :param card_hand: Card list
+        :return: dictionary containing values for each suit in hand
+        """
         card_sum = {"S": 0, "C": 0, "H": 0, "D": 0}
 
         for card in card_hand:
@@ -125,23 +133,28 @@ class NPC(Player):
         card_details = self.check_value(hand_copy)  # This is the code for checking the values of first collection
 
         max_value = max(list(card_details.values()))  # This is for maximum value we have from sits
-        min_value = 12
+        min_value = 12  # This is minimum value of hand
         max_hand = hand_copy[:]  # This is the best hand we have till we replace cards
 
         # In this loop we are replacing the card with each card in hand and see what as the maximum value of single\
-        # suit cards
+        # suit cards at the same time we check whether the card we are discarding is the best card to discard.
         for i in range(3):
             hand_copy[i] = card
             card_details = self.check_value(hand_copy)
 
             # This is the code to reassign max_hand and max_value if we found a collection better than before
+            # This is also checking that whether we are discarding the correct minimum card
+            # 1 priority : whether the max of current hand is larger than or equal to the max so far
+            # 2 priority : current max is larger than max so far
+            # 3 priority : evan though max has no difference value of the card is min than before
+            # you may think carefully in order to understand this logic
             if max_value <= max(list(card_details.values())) and \
                     (self.pack_value[self.hand[i][1:]] < min_value or max_value < max(list(card_details.values()))):
                 max_hand = hand_copy[:]  # because later when we change hand_copy max_hand should not be changed
                 max_value = max(list(card_details.values()))
                 min_value = self.pack_value[self.hand[i][1:]]
 
-            hand_copy = self.hand[:]
+            hand_copy = self.hand[:]  # we are renewing the hand_copy each time to chose the best collection
 
         return max_hand
 
@@ -154,20 +167,18 @@ class NPC(Player):
         old_hand = self.hand[:]
         self.hand = new_hand
 
-        # because we never get have duplicate values in hand
+        # because we never get have duplicate values in hand we can use sets to find values\
+        # which are in A and not in B easily
         card_discard = set(old_hand) - set(new_hand)
 
         # In here we don't want to think about entering new hand as self.hand because it was handled in the GameMain
         return list(card_discard)[0]
 
-    def just_begun(self):
-        self.hot_round = True
-
-    def old_round(self):
-        self.hot_round = False
-
 
 class FontColors:
+    """
+    This is a class which containing escape char which are referring to colors and bold and underline
+    """
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'
