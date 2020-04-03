@@ -9,7 +9,8 @@ if input("Do You Know The Basic Rules Of This Game(Y/ N):").upper() == "N":
     print("""
     The Basic game is played by four players but in this game you can play this game with any number 
     of players How ever the recommended number is four
-    You can even play this game with the computer but it will be too easy if you are a pro ; )
+    You can even play this game with the computer NPC : Non Player Character and it will be intersting
+    if you get few NPC and 
     
     This game is played with a single card deck and what our objective is to collect cards in a
     single suit(Clubs, Diamonds, Hearts, Spades) which give the total value of 31,
@@ -43,9 +44,7 @@ if input("Do You Know The Basic Rules Of This Game(Y/ N):").upper() == "N":
            
     How ever if a player got 31 in his hand in same suit he will win instantly and it is called blitZ
     
-    every player can pass their hand without taking the card on the table or looking at the top card on 
-    the deck. But if a player see the top card on the deck  he has to replace it or place it on the top
-    of the discard cards on the table.
+    every player can pass their hand after looking at the top card on the deck and place it on the table.
     
     So This is hove The Game Goes The Program Will Lead You through out the game
     So Enjoy ;-)""")
