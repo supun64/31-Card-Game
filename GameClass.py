@@ -41,8 +41,6 @@ class Player:
     in this class. and also see_deck_card which was in this class was non static(it was not a method 
     that is unique for each instances) so I removed it from this class and made it a function"""
 
-    game_round = True
-
     def __init__(self, name):
         self.name = name
         self.hand = []
@@ -88,16 +86,8 @@ class Player:
         self.hand.append(card)
         self.remove_card(old_card)
 
-    def knock(self):
-        """
-        after this knock there will be only one chance for other players means this will be the last round
-        :return: False for game_round
-        """
-        self.game_round = False
-        return self.game_round
 
-
-class Dealer(Player):
+class NPC(Player):
     """
     This is a class for single AI player in the game
     """
@@ -105,8 +95,8 @@ class Dealer(Player):
     pack_value = {"A": 11, "K": 10, "Q": 10, "J": 10, "10": 10, "9": 9,
                   "8": 8, "7": 7, "6": 6, "5": 5, "4": 4, "3": 3, "2": 2}
 
-    def __init__(self):
-        Player.__init__(self, name="Alex")
+    def __init__(self, name):
+        Player.__init__(self, name)
 
     def check_value(self, card_hand):
         card_sum = {"S": 0, "C": 0, "H": 0, "D": 0}
@@ -150,3 +140,16 @@ class Dealer(Player):
             hand_copy = self.hand[:]
 
         return max_hand
+
+    def get_collection(self, new_hand):
+        """
+        This is a method to update the hand
+        :param cards: list of cards that's gonna be new hand
+        :return: the card that had to be discard from old hand in order to create the new hand
+        """
+        old_hand = self.hand[:]
+        self.hand = new_hand
+
+        # because we never get have duplicate values in hand
+        card_discard = set(old_hand) - set(new_hand)
+        return list(card_discard)[0]

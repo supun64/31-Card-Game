@@ -1,5 +1,6 @@
 # This is the main logic and outputs in the game
 from GameClass import *
+import time
 
 # Welcome introduction of the game
 print("Welcome to 31-CARD GAME!!!")
@@ -146,19 +147,26 @@ def pack_end(card_pack):
         return False
 
 
+def gen_name(name_list):
+    rand_name = random.choice(name_list)
+    name_list.remove(rand_name)
+    return rand_name
+
+
 # This is the main game function
 def main():
     try:
         # We use the exception for any non integer values that user input
         # number of players that playing the game at the beginning
         num_players = int(input("Enter the number of players you want to play this game: "))
+        num_npc = int(input("Enter the number of AI players you want to get (0 for None) :"))
     except ValueError:
         print("Invalid input please enter a valid number of players!!")
         main()
     else:
 
         # Number of players should belongs to (1, 10)
-        if not 10 > num_players > 1:
+        if not 10 > num_players + num_npc and num_players >= 1:
             print("There should be more than 1 players and maximum of 10 players to play this game")
             main()
 
@@ -170,14 +178,25 @@ def main():
 
             print("*"*50)
 
+        npc_list = []
+        names = ['Lara', 'Sweet', 'C. Jonson', 'Lit. Soap', 'Cpt. Price', 'Logan', 'Sam', 'Hancock']
+        print("NPCs in the game:")
+        for x in range(num_players + 1, num_players + num_npc + 1):
+            vars()[f"player_{x}"] = NPC(gen_name(names))
+            print(f"\t{eval(f'player_{x}').name} you have {eval(f'player_{x}').lives} lives")
+            npc_list.append(x)
+
+        print("*" * 50)
+
         # These are the variables that are needed through out the game
-        player_list = list(range(1, num_players + 1))
+        player_list = list(range(1, num_players + num_npc + 1))
         # These are the place holders that we need in the game
         last_player_knocked = None
         not_in_game = []
         table_card = None
         pack = None
         knocked_player = None
+        user_command = None
         # These are boolean values at the beginning of the game
         new_round = True
         card_pack_end = False
@@ -209,32 +228,70 @@ def main():
             # This is the loop for each players hand in a game round - PLAYER LOOP
             for player in player_list:
 
+                current_player = eval(f"player_{player}")  # We created this variable because it is easy to use
+
                 # This is the condition for having a blitz at the very beginning
                 # As now all the hands have distributed We don't need to continue the loop
                 if blitz:
                     result_check = True
                     break  # breaking from the PLAYER LOOP
 
-                current_player = eval(f"player_{player}")  # We created this variable because it is easy to use
+                # This is the code if the player is a npc
+                if player in npc_list:
+                    print(f"{current_player.name} is playing...")
+                    time.sleep(random.randint(1, 6))
 
-                # This is the code where player get chance to see his hand and card on the table at the moment
-                print(f"{current_player.name} is playing: \n")
-                print(f"Your Hand: {' '.join(current_player.hand)}")
-                print(f"Table Card: {table_card}")
+                    old_max_suit = max_total(current_player.hand)
+                    best_from_table = current_player.card_collection(table_card)
+                    new_max_suit = max_total(best_from_table)
 
-                # This is for let other players know if there is a knock
-                if knock:
-                    print(f"{eval(f'player_{player_list[last_player_knocked]}').name} has knocked!!!")
+                    # This runs if knock is a good choice
+                    if old_max_suit > 25:
+                        knock = True
 
-                # list of Commands that player can have at this point
-                print("""
-                    1. Exchange the table card
-                    2. See the deck card
-                    3. Knock
-                    4. Pass""")
+                    # This runs if table card is not a good choice
+                    elif old_max_suit == new_max_suit:
+                        table_card = see_deck_card(pack)
+                        best_from_deck = current_player.card_collection(table_card)
 
-                user_command = common_cmd()  # we are taking the user command from a function
-                next_player = False  # used to stop the game until this player enter a valid command next
+                        # This runs if pack is over
+                        if pack_end(pack):
+                            result_check = True
+
+                        # This runs if deck card is a good choice
+                        elif old_max_suit < max_total(best_from_deck):
+                            table_card = current_player.get_collection(best_from_deck)
+
+                    # This code run if table card is a good choice
+                    elif old_max_suit < new_max_suit:
+                        table_card = current_player.get_collection(best_from_table)
+
+                    print("_"*100)
+
+                    # we have to use like this because we can't use continue because npc also can knock and
+                    # it cause for every player
+                    next_player = True
+
+                # This is the code if the player is not npc
+                else:
+                    # This is the code where player get chance to see his hand and card on the table at the moment
+                    print(f"{current_player.name} is playing: \n")
+                    print(f"Your Hand: {' '.join(current_player.hand)}")
+                    print(f"Table Card: {table_card}")
+
+                    # This is for let other players know if there is a knock
+                    if knock:
+                        print(f"{eval(f'player_{player_list[last_player_knocked]}').name} has knocked!!!")
+
+                    # list of Commands that player can have at this point
+                    print("""
+                        1. Exchange the table card
+                        2. See the deck card
+                        3. Knock
+                        4. Pass""")
+
+                    user_command = common_cmd()  # we are taking the user command from a function
+                    next_player = False  # used to stop the game until this player enter a valid command next
 
                 # This is a loop to make user input correct secondary command - COMMAND 1 LOOP
                 # Because we have to keep the user asking for input until he insert the correct input
@@ -532,6 +589,7 @@ def main():
                 print("_" * 100 + "\n")
                 print("_" * 100 + "\n")
                 print("\n")
+                time.sleep(5)
 
 
 main()
