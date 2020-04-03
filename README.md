@@ -17,7 +17,7 @@ This is a card game played by several players and the goal is to not get the low
 
 ## Basic Rules Of The Game
 
-    you can watch how to play the game in [here](https://www.youtube.com/watch?v=xW9FBHR-rLs).
+    you can watch how to play the game in [this link](https://www.youtube.com/watch?v=xW9FBHR-rLs).
 
     The Basic game is played by four players but in this game you can play this game with any number of players How ever the recommended
     number is four You can even play this game with the computer but it will be too easy if you are a pro ; )
