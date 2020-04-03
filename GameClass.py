@@ -97,6 +97,7 @@ class NPC(Player):
 
     def __init__(self, name):
         Player.__init__(self, name)
+        self.hot_round = True
 
     def check_value(self, card_hand):
         card_sum = {"S": 0, "C": 0, "H": 0, "D": 0}
@@ -153,3 +154,20 @@ class NPC(Player):
         # because we never get have duplicate values in hand
         card_discard = set(old_hand) - set(new_hand)
         return list(card_discard)[0]
+
+    def just_begun(self):
+        self.hot_round = True
+
+    def old_round(self):
+        self.hot_round = False
+
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
