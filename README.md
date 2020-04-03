@@ -43,17 +43,19 @@ what left in the deck is kept on the table and the top card is shown When each p
 the card shown on the table or they can take the top card from the deck and replace a card with you, How ever you should keep only 
 3 cards.
 
-If a player is satisfied with the value of card they have they can 'Knock' when he does every other player get a chance to get a
-card in either way mention above after all other players got their chance,
+If a player is satisfied with the value of card he has he can 'Knock', and when he does every other player get **only one chance** to
+play in that round
     1. The person who has the lowest value of cards in the same suit will lose a life
     2. If the person who had knock has the lowest card value he will lose **two lives**
     3. If two people have same lowest value then **both of them** will lose a life 
 
-How ever if a player got 31 in his hand in same suit the round will be over instantly and player/players who got lowest values in
+How ever if a player got 31 in his hand in same suit, the round will be over instantly and player/players who got lowest values in
 there hand will loose that round
 
 every player can pass their hand without taking the card on the table or looking at the top card on the deck. But if a player see
 the top card on the deck  he has to replace it or place it on the top of the discard cards on the table.
+
+The winner is obvious, the player who stand in the game till the end will be the winner
 
 So This is hove The Game Goes, The Program Will Lead You through out the game
 So Enjoy ;-)
