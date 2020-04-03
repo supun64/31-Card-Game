@@ -16,8 +16,9 @@ This is a card game played by several players and the goal is to not get the low
     Pass           : If a player is not satisfied with both table and deck cards he can pass his hand to the next player
 
 ## Basic Rules Of The Game
+[this link on youtube] : https://www.youtube.com/watch?v=xW9FBHR-rLs
 
-    you can watch how to play the game in [this link] (https://www.youtube.com/watch?v=xW9FBHR-rLs).
+    you can watch how to play the game in [this link on youtube]
 
     The Basic game is played by four players but in this game you can play this game with any number of players How ever the recommended
     number is four You can even play this game with the computer but it will be too easy if you are a pro ; )
