@@ -3,7 +3,7 @@ from GameClass import *
 import time
 
 # Welcome introduction of the game
-print(f"{bcolors.BOLD}{bcolors.UNDERLINE}{bcolors.OKBLUE}Welcome to 31-CARD GAME!!!{bcolors.ENDC}")
+print(f"{FontColors.BOLD}{FontColors.UNDERLINE}{FontColors.OKBLUE}Welcome to 31-CARD GAME!!!\n{FontColors.ENDC}")
 if input("Do You Know The Basic Rules Of This Game(Y/ N):").upper() == "N":
     print("Rules And Objectives of 31 CARD GAME".center(100, "_") + "\n")
     print("""
@@ -52,7 +52,7 @@ if input("Do You Know The Basic Rules Of This Game(Y/ N):").upper() == "N":
 
 # This is a decoration
 else:
-    print(f"{bcolors.WARNING}" + "_"*100 + f"{bcolors.ENDC}")
+    print(f"{FontColors.WARNING}" + "_"*100 + f"{FontColors.ENDC}")
     print("Lets get started then,")
 
 
@@ -66,7 +66,7 @@ print("\n"
       "Case does not matter but please use the method.\n"
       "You should use the given number for the command you wish to take.")
 
-print(f"{bcolors.WARNING}" + "_"*100 + f"{bcolors.ENDC}")
+print(f"{FontColors.WARNING}" + "_"*100 + f"{FontColors.ENDC}")
 
 
 # commonly used functions in this code
@@ -193,6 +193,7 @@ def main():
             print(f"\t{eval(f'player_{x}').name} you have {eval(f'player_{x}').lives} lives")
             npc_list.append(x)
 
+        time.sleep(4)
         print("*" * 50)
 
         # These are the variables that are needed through out the game
@@ -248,7 +249,7 @@ def main():
 
                 # This is the code if the player is a npc
                 if player in npc_list:
-                    print(f"{bcolors.FAIL}{current_player.name} is playing...{bcolors.ENDC}")
+                    print(f"{FontColors.FAIL}{current_player.name} is playing...{FontColors.ENDC}")
                     time.sleep(random.randint(1, 6))
 
                     old_max_suit = max_total(current_player.hand)
@@ -289,7 +290,7 @@ def main():
 
                 # This is the code if the player is not npc
                 else:
-                    print(f"{bcolors.WARNING}" + "_" * 100 + f"{bcolors.ENDC}")
+                    print(f"{FontColors.WARNING}" + "_" * 100 + f"{FontColors.ENDC}")
                     # This is the code where player get chance to see his hand and card on the table at the moment
                     print(f"{current_player.name} is playing: \n")
                     print(f"Your Hand: {' '.join(current_player.hand)}")
@@ -334,7 +335,7 @@ def main():
                             # decoration with players updated hand
                             print()
                             print(f'Your hand is: {" ".join(current_player.hand)}')
-                            print(f"{bcolors.WARNING}" + "_" * 100 + f"{bcolors.ENDC}")
+                            print(f"{FontColors.WARNING}" + "_" * 100 + f"{FontColors.ENDC}")
 
                             # we hve rearrange our hand so we need to check for blitz
                             blitz = is_blitz(current_player.hand)
@@ -395,7 +396,7 @@ def main():
                                             table_card = ex_card  # now the table card is what player discard
 
                                             print(f'Your hand is: {" ".join(current_player.hand)}')
-                                            print(f"{bcolors.WARNING}" + "_" * 100 + f"{bcolors.ENDC}")
+                                            print(f"{FontColors.WARNING}" + "_" * 100 + f"{FontColors.ENDC}")
 
                                             blitz = is_blitz(current_player.hand)  # check blitz cause hand has updated
                                             next_player = True  # leaves the COMMAND 1 LOOP (indent lvl: 6)
@@ -417,7 +418,7 @@ def main():
 
                                         table_card = deck_card  # Deck card is now being placed on the table
 
-                                        print(f"{bcolors.WARNING}" + "_" * 100 + f"{bcolors.ENDC}")
+                                        print(f"{FontColors.WARNING}" + "_" * 100 + f"{FontColors.ENDC}")
 
                                         ex_card = "Passed"  # we use this variable to get away from the loop
                                         next_player = True  # leave COMMAND 2 LOOP (indent lvl: 6)
@@ -439,13 +440,13 @@ def main():
                     elif user_command == "3" and not knock:
                         knock = True  # Get access to KNOCK LOOP
                         next_player = True  # leave COMMAND 1 LOOP (indent lvl: 4)
-                        print(f"{bcolors.WARNING}" + "_" * 100 + f"{bcolors.ENDC}")
+                        print(f"{FontColors.WARNING}" + "_" * 100 + f"{FontColors.ENDC}")
 
                     # This is the code to pass if player decided to pass
                     elif user_command == "4":
                         print(f'Your hand is: {" ".join(current_player.hand)}')
                         next_player = True  # break COMMAND 1 LOOP (indent lvl: 4)
-                        print(f"{bcolors.WARNING}" + "_" * 100 + f"{bcolors.ENDC}")
+                        print(f"{FontColors.WARNING}" + "_" * 100 + f"{FontColors.ENDC}")
 
                     # If this loop is going on a knocked situation
                     # This code is created to display other players that they can't knock again
@@ -583,8 +584,8 @@ def main():
                 if len(player_list) == 1:
 
                     winner = player_list[0]
-                    print(f"{bcolors.BOLD}{bcolors.OKBLUE}Congratulations {eval(f'player_{winner}').name} "
-                          f"You Won The Game!!!{bcolors.ENDC}")
+                    print(f"{FontColors.BOLD}{FontColors.OKBLUE}Congratulations {eval(f'player_{winner}').name} "
+                          f"You Won The Game!!!{FontColors.ENDC}")
                     print("_" * 100 + "\n")
 
                     # This is to check whether players need to play again
@@ -593,7 +594,7 @@ def main():
                     if play_again == "Y":
                         main()
                     else:
-                        print(f"{bcolors.OKGREEN}Thank You For Playing 31, Good Bye!!! : ){bcolors.ENDC}")
+                        print(f"{FontColors.OKGREEN}Thank You For Playing 31, Good Bye!!! : ){FontColors.ENDC}")
                         break  # break from MAIN LOOP
 
                 # This is to find out if there is any user still playing the game
@@ -601,8 +602,8 @@ def main():
                     if char_player not in npc_list:
                         break
                 else:
-                    print(f"{bcolors.FAIL}Only NPCs left, AI don't want to challenge AI ;-){bcolors.ENDC}")
-                    print(f"{bcolors.FAIL}{bcolors.BOLD}Better Luck Next Time Users!!!{bcolors.ENDC}")
+                    print(f"{FontColors.FAIL}Only NPCs left, AI don't want to challenge AI ;-){FontColors.ENDC}")
+                    print(f"{FontColors.FAIL}{FontColors.BOLD}Better Luck Next Time Users!!!{FontColors.ENDC}")
 
                     # This is to check whether players need to play again
                     play_again = input("Do You Want To Play Again[Y/N]: ").upper()
@@ -610,7 +611,7 @@ def main():
                     if play_again == "Y":
                         main()
                     else:
-                        print(f"{bcolors.OKGREEN}Thank You For Playing 31, Good Bye!!! : ){bcolors.ENDC}")
+                        print(f"{FontColors.OKGREEN}Thank You For Playing 31, Good Bye!!! : ){FontColors.ENDC}")
                         break  # break from MAIN LOOP
 
                 # decoration before next round

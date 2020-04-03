@@ -125,6 +125,7 @@ class NPC(Player):
         card_details = self.check_value(hand_copy)  # This is the code for checking the values of first collection
 
         max_value = max(list(card_details.values()))  # This is for maximum value we have from sits
+        min_value = 12
         max_hand = hand_copy[:]  # This is the best hand we have till we replace cards
 
         # In this loop we are replacing the card with each card in hand and see what as the maximum value of single\
@@ -134,9 +135,11 @@ class NPC(Player):
             card_details = self.check_value(hand_copy)
 
             # This is the code to reassign max_hand and max_value if we found a collection better than before
-            if max_value < max(list(card_details.values())):
+            if max_value <= max(list(card_details.values())) and \
+                    (self.pack_value[self.hand[i][1:]] < min_value or max_value < max(list(card_details.values()))):
                 max_hand = hand_copy[:]  # because later when we change hand_copy max_hand should not be changed
                 max_value = max(list(card_details.values()))
+                min_value = self.pack_value[self.hand[i][1:]]
 
             hand_copy = self.hand[:]
 
@@ -145,7 +148,7 @@ class NPC(Player):
     def get_collection(self, new_hand):
         """
         This is a method to update the hand
-        :param cards: list of cards that's gonna be new hand
+        :param new_hand: list of cards that's gonna be new hand
         :return: the card that had to be discard from old hand in order to create the new hand
         """
         old_hand = self.hand[:]
@@ -153,6 +156,8 @@ class NPC(Player):
 
         # because we never get have duplicate values in hand
         card_discard = set(old_hand) - set(new_hand)
+
+        # In here we don't want to think about entering new hand as self.hand because it was handled in the GameMain
         return list(card_discard)[0]
 
     def just_begun(self):
@@ -162,7 +167,7 @@ class NPC(Player):
         self.hot_round = False
 
 
-class bcolors:
+class FontColors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'
