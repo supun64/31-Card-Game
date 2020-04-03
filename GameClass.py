@@ -187,3 +187,5 @@ class FontColors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+    MAGENTA = '\033[35m'
+    BRED = '\033[31;1m'

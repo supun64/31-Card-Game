@@ -3,13 +3,13 @@ from GameClass import *
 import time
 
 # Welcome introduction of the game
-print(f"{FontColors.BOLD}{FontColors.UNDERLINE}{FontColors.OKBLUE}Welcome to 31-CARD GAME!!!\n{FontColors.ENDC}")
+print(f"{FontColors.BOLD}{FontColors.UNDERLINE}{FontColors.OKBLUE}Welcome to 31-CARD GAME!!!{FontColors.ENDC}\n")
 if input("Do You Know The Basic Rules Of This Game(Y/ N):").upper() == "N":
     print("Rules And Objectives of 31 CARD GAME".center(100, "_") + "\n")
     print("""
     The Basic game is played by four players but in this game you can play this game with any number 
     of players How ever the recommended number is four
-    You can even play this game with the computer NPC : Non Player Character and it will be intersting
+    You can even play this game with the computer NPC : Non Player Character and it will be interesting
     if you get few NPC and 
     
     This game is played with a single card deck and what our objective is to collect cards in a
@@ -193,8 +193,11 @@ def main():
             print(f"\t{eval(f'player_{x}').name} you have {eval(f'player_{x}').lives} lives")
             npc_list.append(x)
 
-        time.sleep(4)  # Small time to took around players
+        if not npc_list:
+            print("\tNone")
+
         print("*" * 50)
+        time.sleep(4)  # Small time to took around players
 
         # These are the variables that are needed through out the game
         player_list = list(range(1, num_players + num_npc + 1))
@@ -304,7 +307,8 @@ def main():
 
                     # This is for let other players know if there is a knock
                     if knock:
-                        print(f"{eval(f'player_{player_list[last_player_knocked]}').name} has knocked!!!")
+                        print(f"{FontColors.BRED}{eval(f'player_{player_list[last_player_knocked]}').name} "
+                              f"has knocked!!!{FontColors.ENDC}")
 
                     # list of Commands that player can have at this point
                     print("""
